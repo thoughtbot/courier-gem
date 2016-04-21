@@ -1,5 +1,6 @@
 require "courier/version"
+require "courier/client"
+require "courier/broadcast"
 
 module Courier
-  # Your code goes here...
 end

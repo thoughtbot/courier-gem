@@ -25,7 +25,7 @@ Or install it yourself as:
 Instantiate a Courier instance with your app's API token:
 
 ```ruby
-courier = Courier.new(api_token: "[YOUR_API_TOKEN]")
+courier = Courier::Client.new(api_token: "[YOUR_API_TOKEN]")
 ```
 
 Broadcast a notification to a channel:
@@ -36,7 +36,7 @@ broadcast = courier.broadcast("[CHANNEL_NAME]", alert: "Hello from Courier", bad
 if broadcast.sent?
   # How do you handle success?
 else
-  # Interpret broadcast.response_code
+  # Interpret broadcast.status_code
 end
 ```
 
