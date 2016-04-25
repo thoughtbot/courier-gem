@@ -5,9 +5,12 @@ module Courier
   class Client
     DEFAULT_BASE_URL = "https://courier.thoughtbot.com".freeze
 
-    def initialize(api_token:, base_url: DEFAULT_BASE_URL)
+    def initialize(api_token:,
+                   base_url: DEFAULT_BASE_URL,
+                   environment: "production")
       @api_token = api_token
       @base_url = base_url
+      @environment = environment
     end
 
     def broadcast(channel, payload)
@@ -20,14 +23,14 @@ module Courier
 
     private
 
-    attr_reader :api_token
-    attr_reader :base_url
+    attr_reader :api_token, :base_url, :environment
 
     def http
       Faraday.new(url: base_url) do |conn|
         conn.headers["Accept"] = "application/json version=1"
         conn.headers["Content-Type"] = "application/json"
         conn.request :json
+        conn.params["environment"] = environment
         conn.token_auth api_token
         conn.adapter Faraday.default_adapter
       end

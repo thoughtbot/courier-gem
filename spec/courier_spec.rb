@@ -13,6 +13,7 @@ describe Courier do
           "Content-Type": "application/json",
           "Authorization": "Token token=\"#{api_token}\"",
         },
+        query: { environment: "production" },
         body: { broadcast: {
           payload: {
             "alert": "Hello from Courier",
@@ -29,6 +30,7 @@ describe Courier do
 
     it "returns a Broadcast model" do
       stub_request(:post, "https://courier.thoughtbot.com/broadcast/channel").
+        with(query: { environment: "production" }).
         to_return(status: 200)
 
       courier = Courier::Client.new(api_token: "token")
@@ -43,9 +45,21 @@ describe Courier do
     it "supports configuring the courier URL" do
       base_url = "https://example.com"
       url = "#{base_url}/broadcast/channel"
-      stub = stub_request(:post, url)
+      stub = stub_request(:post, url).with(query: { environment: "production" })
 
       courier = Courier::Client.new(api_token: "token", base_url: base_url)
+      courier.broadcast("channel", alert: "Hello from Courier")
+
+      expect(stub).to have_been_requested
+    end
+
+    it "supports configuring the environment" do
+      url = "https://courier.thoughtbot.com/broadcast/channel"
+      stub = stub_request(:post, url).with(query:
+                                           { environment: "development" })
+
+      courier = Courier::Client.new(api_token: "token",
+                                    environment: "development")
       courier.broadcast("channel", alert: "Hello from Courier")
 
       expect(stub).to have_been_requested
