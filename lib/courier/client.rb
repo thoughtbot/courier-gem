@@ -3,11 +3,11 @@ require "active_support/inflector"
 
 module Courier
   class Client
-    URL = "https://courier.thoughtbot.com".freeze
+    DEFAULT_BASE_URL = "https://courier.thoughtbot.com".freeze
 
-    attr_reader :api_token
-    def initialize(api_token:)
+    def initialize(api_token:, base_url: DEFAULT_BASE_URL)
       @api_token = api_token
+      @base_url = base_url
     end
 
     def broadcast(channel, payload)
@@ -20,8 +20,11 @@ module Courier
 
     private
 
+    attr_reader :api_token
+    attr_reader :base_url
+
     def http
-      Faraday.new(url: URL) do |conn|
+      Faraday.new(url: base_url) do |conn|
         conn.headers["Accept"] = "application/json version=1"
         conn.headers["Content-Type"] = "application/json"
         conn.request :json

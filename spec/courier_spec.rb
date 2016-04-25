@@ -39,5 +39,16 @@ describe Courier do
                                                      payload: payload,
                                                      status_code: 200))
     end
+
+    it "supports configuring the courier URL" do
+      base_url = "https://example.com"
+      url = "#{base_url}/broadcast/channel"
+      stub = stub_request(:post, url)
+
+      courier = Courier::Client.new(api_token: "token", base_url: base_url)
+      courier.broadcast("channel", alert: "Hello from Courier")
+
+      expect(stub).to have_been_requested
+    end
   end
 end
