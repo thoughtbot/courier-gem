@@ -25,16 +25,18 @@ Or install it yourself as:
 
 ## Usage
 
-Instantiate a Courier instance with your app's API token:
+Instantiate a Courier instance with your app's API token and an environment:
 
 ```ruby
-courier = Courier::Client.new(api_token: "[YOUR_API_TOKEN]")
+courier = Courier::Client.new(api_token: "[YOUR_API_TOKEN]", environment: :development)
 ```
+
+For the environment choose `:development` if you're sending notifications to a development build of an app. If you're sending notifications to an app signed with a distribution certificate (TestFlight, HockeyApp, AppStore, etc) use `:production`.
 
 Broadcast a notification to a channel:
 
 ```ruby
-broadcast = courier.broadcast("[CHANNEL_NAME]", alert: "Hello from Courier", badge: "1")
+broadcast = courier.broadcast("[CHANNEL_NAME]", alert: "Hello from Courier")
 
 if broadcast.sent?
   # How do you handle success?
