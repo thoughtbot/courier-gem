@@ -5,9 +5,7 @@ module Courier
   class Client
     DEFAULT_BASE_URL = "https://courier.thoughtbot.com".freeze
 
-    def initialize(api_token:,
-                   base_url: DEFAULT_BASE_URL,
-                   environment: "production")
+    def initialize(api_token:, environment:, base_url: DEFAULT_BASE_URL)
       @api_token = api_token
       @base_url = base_url
       @environment = environment

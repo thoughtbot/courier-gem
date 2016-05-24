@@ -22,7 +22,10 @@ describe Courier do
         },
       })
 
-      courier = Courier::Client.new(api_token: api_token)
+      courier = Courier::Client.new(
+        api_token: api_token,
+        environment: :production,
+      )
       courier.broadcast(channel, alert: "Hello from Courier", badge: "1")
 
       expect(stub).to have_been_requested
@@ -33,7 +36,10 @@ describe Courier do
         with(query: { environment: "production" }).
         to_return(status: 200)
 
-      courier = Courier::Client.new(api_token: "token")
+      courier = Courier::Client.new(
+        api_token: "token",
+        environment: :production,
+      )
       payload = { alert: "Hello from Courier" }
       broadcast = courier.broadcast("channel", payload)
 
@@ -47,7 +53,11 @@ describe Courier do
       url = "#{base_url}/broadcast/channel"
       stub = stub_request(:post, url).with(query: { environment: "production" })
 
-      courier = Courier::Client.new(api_token: "token", base_url: base_url)
+      courier = Courier::Client.new(
+        api_token: "token",
+        environment: :production,
+        base_url: base_url
+      )
       courier.broadcast("channel", alert: "Hello from Courier")
 
       expect(stub).to have_been_requested
@@ -59,7 +69,7 @@ describe Courier do
                                            { environment: "development" })
 
       courier = Courier::Client.new(api_token: "token",
-                                    environment: "development")
+                                    environment: :development)
       courier.broadcast("channel", alert: "Hello from Courier")
 
       expect(stub).to have_been_requested
