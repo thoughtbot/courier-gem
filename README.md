@@ -6,6 +6,7 @@ Ruby gem for interacting with the [Courier] API.
 
 [![Build Status](https://circleci.com/gh/thoughtbot/courier-gem.svg?style=shield&circle-token=b09feb2f03dbc8fa7aa16d1977da3771b47c675c)](https://circleci.com/gh/thoughtbot/courier-gem)
 [![Code Climate](https://codeclimate.com/repos/572a0503b781dc24b0000564/badges/db6744d185fd35deb8da/gpa.svg)](https://codeclimate.com/repos/572a0503b781dc24b0000564/feed)
+[![Inline docs](http://inch-ci.org/github/thoughtbot/courier-gem.svg?branch=master)](http://inch-ci.org/github/thoughtbot/courier-gem)
 
 ## Installation
 
