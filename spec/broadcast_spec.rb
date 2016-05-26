@@ -10,6 +10,14 @@ module Courier
       expect(broadcast).to be_sent
     end
 
+    it "is sent when status_code is 201" do
+      broadcast = Broadcast.new(channel: "channel",
+                                payload: {},
+                                status_code: 201)
+
+      expect(broadcast).to be_sent
+    end
+
     it "is not sent when status_code is not 200" do
       broadcast = Broadcast.new(channel: "channel",
                                 payload: {},

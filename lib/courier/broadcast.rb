@@ -9,7 +9,7 @@ module Courier
     end
 
     def sent?
-      status_code == 200
+      (200..299).cover?(status_code)
     end
 
     def ==(other)
