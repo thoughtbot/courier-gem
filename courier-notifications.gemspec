@@ -4,13 +4,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'courier/version'
 
 Gem::Specification.new do |spec|
-  spec.name                  = "courier"
+  spec.name                  = "courier-notifications"
   spec.version               = Courier::VERSION
   spec.authors               = ["Klaas Pieter Annema"]
-  spec.email                 = ["kpa@thoughtbot.com"]
+  spec.email                 = ["support@thoughtbot.com"]
 
   spec.summary               = %q{Interact with the Courier API}
-  spec.description           = %q{Courier is a service making push notifications easy}
+  spec.description           = %q{Easy push notifications}
   spec.homepage              = "https://courier.thoughtbot.com"
   spec.license               = "MIT"
 
